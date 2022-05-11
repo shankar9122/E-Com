@@ -16,11 +16,12 @@ import { product } from "./data";
 export const fetchProducts = () => async (dispatch, getState) => {
   let data;
   const res = await fetch("https://muigrocery.free.beeceptor.com/groceries");
-  if (res.status === 429) {
+  if (res.status === 200) {
     data = product;
   } else {
     data = await res.json();
   }
+  console.log("data", res)
 
   const cartItems = getState().cart.cartItems.slice();
   data.products = data.products.map((item) => ({
